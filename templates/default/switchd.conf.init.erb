@@ -1,0 +1,36 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          switchd
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop switchd
+### END INIT INFO
+#
+# switchd    This init.d starts/stops switchd
+
+# old style init because Debian
+
+RUN=/usr/sbin
+
+start() {
+  ruby $RUN/switchd_control.rb start 2>&1
+}
+
+stop() {
+  ruby $RUN/switchd_control.rb stop 2>&1
+}
+
+case $1 in
+  start)
+    start
+  ;;
+  stop)
+    stop
+  ;;
+  restart)
+    stop
+    start
+  ;;
+esac

@@ -1,0 +1,17 @@
+# switchd - Cumulus switchd emulation
+#
+# Emulate Cumulus switchd daemon
+
+description "Cumulus switchd emulator"
+
+start on (local-filesystems and net-device-up IFACE!=lo)
+stop on runlevel [!2345]
+
+respawn
+respawn limit 5 30
+
+pre-start script
+    test -x /usr/sbin/switchd || { stop; exit 0; }
+end script
+
+exec /usr/sbin/switchd

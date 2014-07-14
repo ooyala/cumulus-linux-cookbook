@@ -1,0 +1,59 @@
+# ports.conf --
+#
+#   configure port speed, aggregation, and subdivision.
+#
+# accton,as6701_32x has:
+#     32 QSFP+ ports numbered 1-32
+#         These ports are configurable as 40G or split into 4x10G ports.
+#
+#     The X pipeline covers QSFP ports 1-11, 24-26, 30-32 and the Y pipeline
+#     covers QSFP ports 12-23, 27-29.
+#
+#     The Trident2 chip can only handle 52 logical ports per pipeline.
+#
+#     This means 12 is the maximum number of 40G ports you can ungang
+#     per pipeline. The 12 40G ports become 48 unganged 10G ports,
+#     plus the remaining 4 40G ports totals 52 logical ports for that
+#     pipeline.
+
+# [1] http://cumulusnetworks.com/docs/2.0/user-guide/layer_1_2/ports_conf.html
+#
+# QSFP+ ports
+#
+# <port label 1-32> = [4x10G|40G]
+# X pipe
+1=40G
+2=40G
+3=40G
+4=40G
+5=40G
+6=40G
+7=40G
+8=40G
+9=40G
+10=40G
+11=40G
+24=40G
+25=40G
+26=40G
+30=40G
+31=40G
+32=40G
+
+# Y pipe
+12=40G
+13=40G
+14=40G
+15=40G
+16=40G
+17=40G
+18=40G
+19=40G
+20=40G
+21=4x10G
+22=4x10G
+23=40G
+27=40G
+28=40G
+29=40G
+

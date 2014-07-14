@@ -1,0 +1,26 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 1024
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: false
+
+platforms:
+- name: debian
+  driver:
+    box: debian-wheezy-64
+    box_url: http://dl.dropbox.com/u/937870/VMs/wheezy64.box
+
+suites:
+- name: default
+  data_bags_path: <%= "#{ENV['WORKSPACE']}/chef/chef-repo/data_bags" %>
+  run_list:
+    - recipe[cumulus-linux::overlay]
+- name: ports
+  data_bags_path: <%= "#{ENV['WORKSPACE']}/chef/chef-repo/data_bags" %>
+  run_list:
+    - recipe[cumulus-linux::test_ports]
+  attributes:
