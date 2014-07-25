@@ -1,7 +1,8 @@
 Description
 ===========
 
-This cookbook primary purpose is to create a switch overlay on a vanilla Debian and if deployed on the production switch build the correct Port configurations needed for Cumulus.
+This cookbook create a switch overlay on a vanilla Debian and also deploy on
+Cumulus router/switch.
 
 Requirements
 ============
@@ -10,17 +11,20 @@ Requirements
 Acess to Debian Wheezy box
 
 ## Production
-Access to Cumulus HCL switches (Accton AS6701_32X which is what this cookbook was originally written for)
+Access to Cumulus HCL [1] switches (Accton AS6701_32X which is what this cookbook was originally written for)
 
 Attributes
 ==========
+
+default[:cumulus][:dir] = "/etc/cumulus"
+default[:cumulus][:model] = "AS6701_32X"
 
 Usage
 =====
 
 include_recipe "cumulus-linux"
 
-# seting up the hardware ports and layout
+## Setup ardware ports
 ::Chef::Recipe.send(:include, Cumulus)
 case node.cumulus.model
 when "AS6701_32X"
@@ -36,3 +40,25 @@ when "AS6701_32X"
     hardware conf
   end
 end
+
+
+Author and License
+===================
+
+__Author__ Bao Nguyen <ngqbao@gmail.com>
+
+Copyright 2014, Ooyala Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+[1] http://cumulusnetworks.com/support/linux-hardware-compatibility-list

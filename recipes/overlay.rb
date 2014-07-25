@@ -23,15 +23,15 @@
 #::Chef::Recipe.send(:include, Cumulus)
 
 case node.cumulus.model
-when "AS6701_32X"
-  conf = Cumulus::SwitchConfig.new(Accton::AS6701_32X::X_pipeline,Accton::AS6701_32X::Y_pipeline)
+when 'AS6701_32X'
+  conf = Cumulus::SwitchConfig.new(Accton::AS6701_32X::X_pipeline, Accton::AS6701_32X::Y_pipeline)
 
   (21..24).each do |i|
     Chef::Log.info conf[i]
     conf[i].set1x40g
   end
 
-  cumulus_linux_overlay "AS6701_32X" do
+  cumulus_linux_overlay 'AS6701_32X' do
     hardware conf
   end
 end

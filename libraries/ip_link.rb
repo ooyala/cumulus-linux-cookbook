@@ -23,9 +23,9 @@ require 'chef/log'
 require 'chef/mixin/command'
 require 'chef/provider'
 require 'chef/exceptions'
-#require 'erb'
+# require 'erb'
 
-#Usage: ip link add [link DEV] [ name ] NAME
+# Usage: ip link add [link DEV] [ name ] NAME
 #                   [ txqueuelen PACKETS ]
 #                   [ address LLADDR ]
 #                   [ broadcast LLADDR ]
@@ -55,16 +55,16 @@ require 'chef/exceptions'
 #        [ nomaster ]
 #       ip link show [ DEVICE | group GROUP ]
 #
-#TYPE := { vlan | veth | vcan | dummy | ifb | macvlan | can | bridge }
+# TYPE := { vlan | veth | vcan | dummy | ifb | macvlan | can | bridge }
 
-#ip_link "dummy0" do
+# ip_link "dummy0" do
 # dev "swp1"
 # action :set
 # status :up, :down
 # hw_ether "mac"
 # type "dummy"
 # persist true
-#end
+# end
 
 class Chef
   class Provider
@@ -101,32 +101,32 @@ class Chef
 
       protected
 
-        def do_add(command)
-          create_link(command)
-          #persist if persist?
-        end
+      def do_add(command)
+        create_link(command)
+        # persist if persist?
+      end
 
-        def create_link(command)
-          shell_out!(command)
-          Chef::Log.info("#{@new_resource} Adding link #{@new_resource.dev}")
-          Chef::Log.debug("#{@new_resource} Empty file at #{@new_resource.path} created using command '#{command}'")
-        end
+      def create_link(command)
+        shell_out!(command)
+        Chef::Log.info("#{@new_resource} Adding link #{@new_resource.dev}")
+        Chef::Log.debug("#{@new_resource} Empty file at #{@new_resource.path} created using command '#{command}'")
+      end
 
-        def persist?
-          !!@new_resource.persist
-        end
+      def persist?
+        !!@new_resource.persist
+      end
 
-        def ip_link_add_command
-          command = get_link_add_command
-          Chef::Log.debug("#{@new_resource} swap creation command is '#{command}'")
-          command
-        end
+      def _ip_link_add_command
+        command = _get_link_add_command
+        Chef::Log.debug("#{@new_resource} swap creation command is '#{command}'")
+        command
+      end
 
-        def get_link_add_command
-          command = "ip link add {@new_resource.dev} type #{@new_resource.type}"
-          Chef::Log.debug("#{@new_resource} command is '#{command}'")
-          command
-        end
+      def _get_link_add_command
+        command = "ip link add {@new_resource.dev} type #{@new_resource.type}"
+        Chef::Log.debug("#{@new_resource} command is '#{command}'")
+        command
+      end
     end
   end
 end

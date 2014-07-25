@@ -27,6 +27,6 @@ default_action :set
 # Require attributes
 attribute :name,    kind_of: String, name_attribute: true
 attribute :dev,    kind_of: String
-attribute :status,    kind_of: String, default: ""
+attribute :status,    kind_of: String, default: ''
 attribute :hw_ether,    kind_of: String
 attribute :persist, kind_of: [TrueClass, FalseClass], default: false

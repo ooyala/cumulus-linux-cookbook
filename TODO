@@ -1,0 +1,3 @@
+- Namespace management
+- PTMD
+- make use of native netlink (ifconfigupdown2)

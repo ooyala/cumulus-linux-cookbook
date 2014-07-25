@@ -23,24 +23,22 @@ require 'json'
 
 module Accton
   module AS6701_32X
-
     # Standard pipeline info provided by Cumulus
-    X_pipeline = [1,2,3,4,5,6,7,8,9,10,11,24,25,26,30,31,32]
-    Y_pipeline = [12,13,14,15,16,17,18,19,20,21,22,23,27,28,29]
+    X_PIPELINE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 24, 25, 26, 30, 31, 32]
+    Y_PIPELINE = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 27, 28, 29]
   end
 end
 
 module Cumulus
   class SwitchConfig
-
-    def initialize(x=nil,y=nil)
+    def initialize(x = nil, y = nil)
       @ports = []
       x.each do |n|
-        @ports << PortConfig.new(n,"x")
+        @ports << PortConfig.new(n, 'x')
       end
 
       y.each do |n|
-        @ports << PortConfig.new(n,"y")
+        @ports << PortConfig.new(n, 'y')
       end
     end
 
@@ -49,44 +47,39 @@ module Cumulus
     end
 
     def front_panel_port(n)
-      if c = @ports.select{ |c| c.id == n }
-        puts "found: #{c}"
+      if c = @ports.select { |c| c.id == n }
+        puts "Found: #{c}"
         c.first
       else
-        puts "not found"
+        puts 'Not Found'
       end
-   end
+    end
 
     def ports
-      @ports.inject(0) { |acc, p| acc + p.nports }
+      @ports.reduce(0) { |acc, p| acc + p.nports }
     end
 
     def from_json
     end
 
     def pipelines
-      ret = {}
-      @ports.each do |n|
-        ret[n.id] = n.pipeline
+      @ports.reduce({}) do |re, n|
+        re[n.id] = n.pipeline
       end
-      ret
     end
 
     def modes
-      ret = {}
-      @ports.each do |n|
-        ret[n.id] = n.mode
+      @ports.reduce({}) do |re, n|
+        re[n.id] = n.mode
       end
-      ret
     end
 
     def to_json
-      @ports.inject({}) { |acc, p| acc.merge(p.serialize) }.to_json
+      @ports.reduce({}) { |acc, p| acc.merge(p.serialize) }.to_json
     end
   end
 
   class PortConfig
-
     attr_accessor :pipeline
     attr_accessor :id
     attr_accessor :mode
@@ -113,7 +106,7 @@ module Cumulus
     end
 
     def mode
-      @mode == :c4x10g ? "4x10G" : "40G"
+      @mode == :c4x10g ? '4x10G' : '40G'
     end
 
     def nports
@@ -126,30 +119,27 @@ module Cumulus
           "swp#{@id}" => @unit[0].serialize
         }
       else
-        ret = {}
-        @unit.each do |n|
-          ret["swp#{@id}s#{n.id}"] = n.serialize
+        @ports.reduce({}) do |re, n|
+          re["swp#{@id}s#{n.id}"] = n.serialize
         end
-        ret
       end
     end
 
     def deserialize
     end
-
   end
 
   class PortUnit
     attr_accessor :ip
     attr_accessor :id
 
-    def initialize(id=nil)
+    def initialize(id = nil)
       @state = :up
       @id = id
     end
 
     def serialize
-      { :id => @id, :state => @state  }
+      { id: @id, state: @state  }
     end
 
     def deserialize
@@ -157,8 +147,8 @@ module Cumulus
   end
 end
 
-if __FILE__ == $0
-  conf = Cumulus::SwitchConfig.new(Accton::AS6701_32X::X_pipeline,Accton::AS6701_32X::Y_pipeline)
+if __FILE__ == $PROGRAM_NAME
+  conf = Cumulus::SwitchConfig.new(Accton::AS6701_32X::X_PIPELINE, Accton::AS6701_32X::Y_PIPELINE)
   puts conf.ports
   conf[0].set4x10g
   puts conf[10]
@@ -182,7 +172,7 @@ if __FILE__ == $0
 
   puts conf.to_json
 
-  a = Cumulus::PortConfig.new(10, "x")
+  a = Cumulus::PortConfig.new(10, 'x')
   puts a.mode
 
   a.set4x10g
