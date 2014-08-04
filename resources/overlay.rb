@@ -1,4 +1,4 @@
-# Author:: Bao Nguyen <ngqbao@gmail.com>
+# Author:: Bao Nguyen <opensource-cookbooks@ooyala.com>
 # Cookbook:: cumulus-linux
 # Resource:: overlay
 #

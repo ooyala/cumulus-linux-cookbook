@@ -1,5 +1,5 @@
 #
-# Author:: Bao Nguyen <ngqbao@gmail.com>
+# Author:: Bao Nguyen <opensource-cookbooks@ooyala.com>
 # Cookbook Name:: cumulus-linux
 # Recipe:: default
 #
