@@ -1,5 +1,4 @@
-#
-# Author:: Bao Nguyen <ngqba@gmail.com>
+# Author:: Bao Nguyen <opensource-cookbooks@ooyala.com>
 # Library:: ip_link_provider
 # Resource:: ip_link
 #
