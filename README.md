@@ -24,7 +24,7 @@ Usage
 
 include_recipe "cumulus-linux"
 
-## Setup ardware ports
+## Setup Hardware Ports
 ::Chef::Recipe.send(:include, Cumulus)
 case node.cumulus.model
 when "AS6701_32X"
