@@ -16,12 +16,15 @@ Access to Cumulus HCL [1] switches (Accton AS6701_32X which is what this cookboo
 Attributes
 ==========
 
+```ruby
 default[:cumulus][:dir] = "/etc/cumulus"
 default[:cumulus][:model] = "AS6701_32X"
+```
 
 Usage
 =====
 
+```ruby
 include_recipe "cumulus-linux"
 
 ## Setup Hardware Ports
@@ -40,12 +43,12 @@ when "AS6701_32X"
     hardware conf
   end
 end
-
+```
 
 Author and License
 ===================
 
-__Author__ Bao Nguyen <ngqbao@gmail.com>
+__Author__ Bao Nguyen <opensource-cookbooks@ooyala.com>
 
 Copyright 2014, Ooyala Inc.
 
@@ -60,5 +63,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+References
+==========
 
 [1] http://cumulusnetworks.com/support/linux-hardware-compatibility-list
