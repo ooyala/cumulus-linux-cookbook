@@ -20,7 +20,9 @@
 
 # "build" a cumulus switch overlay on a standard Debian system
 
-#::Chef::Recipe.send(:include, Cumulus)
+include_recipe 'cumulus-linux'
+
+::Chef::Recipe.send(:include, Cumulus)
 
 case node.cumulus.model
 when 'AS6701_32X'
