@@ -47,7 +47,8 @@ module Cumulus
     end
 
     def front_panel_port(n)
-      if c = @ports.select { |c| c.id == n }
+      c = @ports.select { |o| o.id == n }
+      if o
         puts "Found: #{c}"
         c.first
       else
@@ -56,7 +57,7 @@ module Cumulus
     end
 
     def ports
-      @ports.reduce(0) { |acc, p| acc + p.nports }
+      @ports.reduce(0) { |a, e| a + e.nports }
     end
 
     def from_json
@@ -75,7 +76,7 @@ module Cumulus
     end
 
     def to_json
-      @ports.reduce({}) { |acc, p| acc.merge(p.serialize) }.to_json
+      @ports.reduce({}) { |a, e| a.merge(e.serialize) }.to_json
     end
   end
 
