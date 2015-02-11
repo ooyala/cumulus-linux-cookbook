@@ -47,8 +47,7 @@ module Cumulus
     end
 
     def front_panel_port(n)
-      c = @ports.select { |o| o.id == n }
-      if o
+      if (c = @ports.select { |o| o.id == n })
         puts "Found: #{c}"
         c.first
       else
