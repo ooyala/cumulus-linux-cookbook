@@ -9,7 +9,7 @@ AllCops:
     - resources/**
   Exclude:
     - example/**
-    - test/**
+    - test/**/*
     - vendor/**
 
 Encoding:
@@ -21,3 +21,11 @@ LineLength:
 WordArray:
   MinSize: 3
 
+Documentation:
+  Enabled: false
+
+MethodLength:
+  Max: 20
+
+ClassAndModuleCamelCase:
+  Enabled: false

@@ -73,7 +73,7 @@ class Chef
       def load_current_resource
         @current_resource ||= Chef::Resource::IPLink.new(new_resource.name)
         @current_resource.dev(new_resource.dev)
-        @current_resource.persist(!!new_resource.persist)
+        @current_resource.persist(new_resource.persist.nil?)
         @current_resource
       end
 
@@ -112,7 +112,7 @@ class Chef
       end
 
       def persist?
-        !!@new_resource.persist
+        @new_resource.persist.nil?
       end
 
       def _ip_link_add_command
